@@ -2,6 +2,13 @@
 
 > **Fork from [delbaoliveira/next-view-transitions](https://github.com/delbaoliveira/next-view-transitions.git)**
 
+<p align="center">
+  <a href="#english">English</a> |
+  <a href="#中文">简体中文</a>
+</p>
+
+<a id="english"></a>
+
 A modern portfolio website built with Next.js and View Transitions API, featuring smooth page transitions, blog showcases, and interactive UI elements.
 
 ## Customizations
@@ -73,7 +80,14 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 ---
 
+<a id="中文"></a>
+
 # 中文说明
+
+<p align="right">
+  <a href="#english">English</a> |
+  <a href="#中文">简体中文</a>
+</p>
 
 ## 现代化作品集网站（带视图过渡效果）
 
