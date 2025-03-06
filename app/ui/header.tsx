@@ -1,3 +1,4 @@
+import { unstable_ViewTransition as ViewTransition } from "react"
 import { clsx as cx } from "clsx"
 import Image from "next/image"
 import Link from "next/link"
@@ -15,31 +16,35 @@ export function Header({ isCollapsed = false }: HeaderProps) {
         "mt-24": !isCollapsed,
       })}
     >
-      <Link href="/">
-        <Image
-          className={cx("rounded-full", {
-            "size-8": isCollapsed,
-          })}
-          src={profile}
-          alt="A profile picture of Delba"
-          width={130}
-          height={130}
-        />
-      </Link>
+      <ViewTransition name="header-image" className="via-blur">
+        <Link href="/">
+          <Image
+            className={cx("rounded-full", {
+              "size-8": isCollapsed,
+            })}
+            src={profile}
+            alt="A profile picture of Delba"
+            width={130}
+            height={130}
+          />
+        </Link>
+      </ViewTransition>
 
       <div className="grid gap-4 items-center">
-        <Link
-          href="/"
-          className={cx(
-            "w-fit font-medium [text-box:trim-both_cap_alphabetic] hover:text-white",
-            {
-              "text-xl self-center": isCollapsed,
-              "text-3xl": !isCollapsed,
-            },
-          )}
-        >
-          Delba
-        </Link>
+        <ViewTransition name="header-title" className="via-blur">
+          <Link
+            href="/"
+            className={cx(
+              "w-fit font-medium [text-box:trim-both_cap_alphabetic] hover:text-white",
+              {
+                "text-xl self-center": isCollapsed,
+                "text-3xl": !isCollapsed,
+              },
+            )}
+          >
+            Delba
+          </Link>
+        </ViewTransition>
 
         {!isCollapsed ? (
           <div>
@@ -48,16 +53,24 @@ export function Header({ isCollapsed = false }: HeaderProps) {
           </div>
         ) : null}
 
-        <div
-          className={cx("w-fit flex gap-2 items-center", {
-            "col-start-2 justify-self-end": isCollapsed,
-          })}
+        <ViewTransition
+          name="header-nav"
+          // only blur when unmounted:
+          // - navs between `/` and `(with-nav)/*`
+          // - but not (with-nav)/* <-> (with-nav)/*
+          share="via-blur"
         >
-          <NavLink href="/">About</NavLink>
-          <NavLink href="/blog">Blog</NavLink>
-          <NavLink href="https://www.youtube.com/@delba">Youtube</NavLink>
-          <NavLink href="https://twitter.com/delba_oliveira">Twitter</NavLink>
-        </div>
+          <div
+            className={cx("w-fit flex gap-2 items-center", {
+              "col-start-2 justify-self-end": isCollapsed,
+            })}
+          >
+            <NavLink href="/">About</NavLink>
+            <NavLink href="/blog">Blog</NavLink>
+            <NavLink href="https://www.youtube.com/@delba">Youtube</NavLink>
+            <NavLink href="https://twitter.com/delba_oliveira">Twitter</NavLink>
+          </div>
+        </ViewTransition>
       </div>
     </div>
   )
