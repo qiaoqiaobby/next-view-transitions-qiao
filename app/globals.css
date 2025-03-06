@@ -14,6 +14,162 @@
   --color-gray-950: var(--color-neutral-950);
 }
 
+/* Base styles */
+html, body {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply antialiased;
+  background: linear-gradient(to bottom, #080808, #111111);
+  min-height: 100vh;
+  color: #f8fafc; /* 默认为暗色模式下的浅色文本 */
+}
+
+/* Theme Toggle Button Animation */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Text colors for dark theme (default) */
+html {
+  --text-primary: #f8fafc;
+  --text-secondary: #e2e8f0;
+  --text-tertiary: #cbd5e1;
+  --text-muted: #94a3b8;
+}
+
+/* Light Theme Styles */
+html.light-theme {
+  --text-primary: #0f172a;
+  --text-secondary: #1e293b;
+  --text-tertiary: #334155;
+  --text-muted: #64748b;
+}
+
+html.light-theme body {
+  background: linear-gradient(to bottom, #f8fafc, #f1f5f9);
+  color: var(--text-primary);
+}
+
+/* 文本颜色覆盖 */
+.text-light-100 {
+  color: var(--text-primary);
+}
+
+.text-light-200 {
+  color: var(--text-secondary);
+}
+
+.text-light-300 {
+  color: var(--text-tertiary);
+}
+
+.text-light-400 {
+  color: var(--text-muted);
+}
+
+html.light-theme .text-light-100 {
+  color: var(--text-primary);
+}
+
+html.light-theme .text-light-200 {
+  color: var(--text-secondary);
+}
+
+html.light-theme .text-light-300 {
+  color: var(--text-tertiary);
+}
+
+html.light-theme .text-light-400 {
+  color: var(--text-muted);
+}
+
+/* 博客内容区域样式 */
+html.light-theme .glass-card {
+  @apply bg-white/40 backdrop-blur-lg border border-gray-200/70 shadow-md;
+  color: var(--text-primary);
+  box-shadow: 0 8px 32px rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+html.light-theme .glass-card:hover {
+  @apply bg-white/50 border-gray-200/80;
+  box-shadow: 0 10px 40px rgba(255, 255, 255, 0.15);
+}
+
+html.light-theme .glass-card p,
+html.light-theme .glass-card li {
+  color: var(--text-tertiary);
+}
+
+html.light-theme .glass-card h1,
+html.light-theme .glass-card h2,
+html.light-theme .glass-card h3 {
+  color: var(--text-primary);
+}
+
+html.light-theme .gradient-text {
+  background-image: linear-gradient(90deg, #0891b2, #4f46e5);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(15, 15, 15, 0.2);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(100, 100, 100, 0.3);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 100, 100, 0.5);
+}
+
+html.light-theme ::-webkit-scrollbar-track {
+  background: rgba(240, 240, 240, 0.5);
+}
+
+html.light-theme ::-webkit-scrollbar-thumb {
+  background: rgba(150, 150, 150, 0.3);
+}
+
+html.light-theme ::-webkit-scrollbar-thumb:hover {
+  background: rgba(150, 150, 150, 0.5);
+}
+
+/* Gradient text */
+.gradient-text {
+  @apply bg-clip-text text-transparent;
+  background-image: linear-gradient(90deg, #10b981, #4f46e5);
+}
+
+/* Card styles */
+.glass-card {
+  @apply bg-black/20 backdrop-blur-md border border-white/10 shadow-lg;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+  @apply bg-black/25 border-white/15;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* View Transitions */
 @keyframes reveal {
   0% {
     scale: 0.8;
@@ -51,11 +207,42 @@ Blur animation for view transitions with tracked elements. Fast-moving solid ele
   animation-name: via-blur;
 }
 
+/* Enhanced transitions */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-up {
+  animation: fade-up 0.5s ease forwards;
+}
+
+/* Responsive design adjustments */
+@media (max-width: 640px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   ::view-transition-group(*),
   ::view-transition-old(*),
   ::view-transition-new(*) {
     /* alternatively, you could design more subtle variants */
+    animation: none !important;
+  }
+  
+  .fade-up, 
+  .animate-gradient-x,
+  .animate-gradient-y,
+  .animate-gradient-xy {
     animation: none !important;
   }
 }

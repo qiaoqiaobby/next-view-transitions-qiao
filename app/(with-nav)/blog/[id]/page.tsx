@@ -1,36 +1,15 @@
-import Link from "next/link"
-import { unstable_ViewTransition as ViewTransition } from "react"
+import { use } from "react"
+import PostDetailClient from './PostDetailClient'
 
-export default async function PostDetail({
-  params,
+// 这是服务器组件，用于处理params参数
+export default function Page({
+  params
 }: {
-  params: Promise<{ id: string }>
+  params: { id: string } | Promise<{ id: string }>
 }) {
-  const { id } = await params
-
-  return (
-    <>
-      <div className="grid gap-5 grid-cols-1">
-        <Link
-          href="/blog"
-          className="text-lg font-medium col-span-full hover:text-white"
-        >
-          All posts
-        </Link>
-
-        <div className="grid gap-2 text-gray-800/70">
-          <ViewTransition
-            name={`post-${id}`}
-            className="via-blur"
-            exit="duration-100"
-          >
-            <div className="aspect-video bg-current rounded-lg mb-1" />
-          </ViewTransition>
-          <div className="bg-current rounded-lg h-[0.5lh]" />
-          <div className="bg-current rounded-lg h-[0.5lh]" />
-          <div className="bg-current rounded-lg h-[0.5lh] w-2/3" />
-        </div>
-      </div>
-    </>
-  )
+  // 在服务器组件中安全地使用React.use()来解包params
+  const resolvedParams = use(Promise.resolve(params))
+  
+  // 将解析后的id传递给客户端组件
+  return <PostDetailClient id={resolvedParams.id} />
 }
