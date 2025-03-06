@@ -16,7 +16,7 @@
 
 | 修改前 | 修改后 |
 |--------|--------|
-| ![原始布局](https://i.imgur.com/placeholder1.jpg) | ![优化布局](https://i.imgur.com/placeholder2.jpg) |
+| ![原始布局](https://fastly.jsdelivr.net/gh/bucketio/img1@main/2025/03/07/1741299156931-c93d68fb-4bf9-4206-a465-eaf56bde2541.png) | ![优化布局](https://fastly.jsdelivr.net/gh/bucketio/img12@main/2025/03/07/1741299258320-b24afd7e-e214-4a2c-a6bd-30662462e5a7.png) |
 | **内容区域宽度受限**<br>- 大屏幕设备上内容区域最大宽度为`max-w-4xl`(约896px)<br>- 页面仅占用大屏幕约1/3的区域<br>- 内容被压缩，卡片排列密集 | **内容区域扩展至80%**<br>- 内容区域宽度为屏幕的80%<br>- 更有效地利用大屏幕空间<br>- 卡片排列更加舒适，可视性更强 |
 
 ### 主要改进
